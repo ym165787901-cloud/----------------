@@ -8,9 +8,96 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="yousef.css">
+<style>
+/* Design tokens */
+:root{--ink:#2a190e;--brown:#4a2c17;--sand:#f4e8cd;--paper:#fbf5e6;--gold:#D4AF37;--gold-d:#8a6d1a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:70px}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{font-family:Amiri,'Traditional Arabic',serif;background:var(--paper);color:var(--ink);line-height:2.1;font-size:1.2rem}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+h1,h2,h3{font-family:'Aref Ruqaa',Amiri,serif;color:var(--brown);line-height:1.5}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:var(--ink);border-bottom:2px solid var(--gold)}
+.nav{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:.5rem 1.2rem}
+.brand{font-family:'Aref Ruqaa',serif;color:var(--gold);font-size:1.6rem}
+.nav ul{display:flex;gap:1.8rem;list-style:none}
+.nav ul a{color:var(--sand)}.nav ul a:hover{color:var(--gold)}
+#menu{display:none;background:none;border:1px solid var(--gold);color:var(--gold);font-size:1.5rem;line-height:1;padding:.2rem .7rem;border-radius:6px;cursor:pointer}
+@media(max-width:700px){
+ #menu{display:block}
+ .nav ul{display:none;position:absolute;inset-inline:0;top:100%;flex-direction:column;gap:0;background:var(--ink);text-align:center;border-bottom:2px solid var(--gold)}
+ .nav ul.open{display:flex}.nav ul a{display:block;padding:.7rem}
+}
+
+/* Hero (image layer first, gradient fallback last) */
+.hero{min-height:88vh;display:grid;place-items:center;text-align:center;padding:4rem 1.2rem;color:var(--sand);
+ background:linear-gradient(rgba(30,16,8,.7),rgba(30,16,8,.88)),
+ url(https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1600&q=70) center/cover,
+ linear-gradient(160deg,#6b4423,#2a190e)}
+.hero h1{font-size:clamp(3.4rem,13vw,8rem);color:var(--gold);line-height:1.2;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.hero .sub{font-size:clamp(1.2rem,3.5vw,1.8rem);letter-spacing:.04em}
+blockquote{max-width:720px;margin:2rem auto;padding:1.2rem;border-block:1px solid var(--gold);font-size:clamp(1.5rem,4.5vw,2.3rem);line-height:1.8}
+blockquote cite{display:block;font-size:1rem;font-style:normal;color:var(--gold);margin-top:.4rem}
+.btn{display:inline-block;padding:.4rem 2rem;border:2px solid var(--gold);color:var(--gold);border-radius:50px;transition:.2s}
+.btn:hover{background:var(--gold);color:var(--ink)}
+
+/* Sections */
+section{padding:4.5rem 1.2rem}
+.wrap{max-width:1000px;margin:auto}
+.title{text-align:center;font-size:clamp(2.1rem,6vw,3rem);margin-bottom:2.2rem}
+.title::after{content:"";display:block;width:90px;height:3px;background:var(--gold);margin:.3rem auto 0}
+.intro{display:grid;grid-template-columns:1fr 1.4fr;gap:2.2rem;align-items:center}
+.intro figure{min-height:340px;border:3px solid var(--gold);border-radius:6px;overflow:hidden;background:linear-gradient(160deg,#c9a46a,#6b4423)}
+.intro img{width:100%;height:100%;min-height:340px;object-fit:cover;display:block}
+.intro p+p{margin-top:.8rem}
+@media(max-width:760px){.intro{grid-template-columns:1fr}.intro figure,.intro img{min-height:240px}}
+
+/* Timeline (native details = user-triggered expand) */
+.tl{margin-top:3rem;padding-inline-start:2rem;border-inline-start:3px solid var(--gold)}
+.ev{position:relative;background:#fff9ea;border:1px solid #e3d2a6;border-radius:8px;padding:.3rem 1.3rem;margin-bottom:1rem}
+.ev::before{content:"";position:absolute;inset-inline-start:-2.65rem;top:1.15rem;width:16px;height:16px;border-radius:50%;background:var(--gold);border:3px solid var(--paper)}
+.ev summary{cursor:pointer;list-style:none;display:flex;gap:.8rem;align-items:baseline;flex-wrap:wrap;font-weight:700;color:var(--brown);padding:.5rem 0}
+.ev summary::-webkit-details-marker{display:none}
+.ev summary::after{content:"+";margin-inline-start:auto;color:var(--gold-d);font-size:1.5rem}
+.ev[open] summary::after{content:"\2212"}
+.ev time{color:var(--gold-d);font-size:1rem}
+.ev p{padding-bottom:.8rem}
+.note{margin-top:2rem;padding:1rem 1.3rem;border-inline-start:4px solid var(--gold);background:var(--sand);font-size:1.1rem}
+
+/* Image band */
+.band{padding:5rem 1.2rem;text-align:center;color:var(--sand);font-size:clamp(1.4rem,4vw,2rem);
+ background:linear-gradient(rgba(30,16,8,.78),rgba(30,16,8,.78)),
+ url(https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1400&q=70) center/cover,
+ linear-gradient(#4a2c17,#2a190e)}
+
+/* Poetry */
+#poetry{background:var(--sand)}
+.poems{display:grid;gap:1.6rem}
+.card{background:linear-gradient(#fffaf0,#f8edd2);border:1px solid var(--gold);border-top-width:5px;border-radius:6px;padding:1.4rem 1.6rem}
+.card h3{font-size:1.7rem}
+.card small{display:block;color:var(--gold-d);font-size:1rem;margin-bottom:.6rem}
+.bayt{display:grid;grid-template-columns:1fr 1fr;gap:2rem;padding:.7rem 0;border-bottom:1px dashed #d8c38a;font-size:1.3rem;font-weight:700;line-height:2}
+.bayt:last-child{border-bottom:0}
+.bayt span:last-child{text-align:left}
+@media(max-width:600px){
+ .bayt{grid-template-columns:1fr;gap:0;font-size:1.2rem}
+ .bayt span:last-child{padding-inline-start:2.2rem;text-align:start}
+ .card{padding:1.1rem}
+}
+
+/* Footer */
+footer{background:var(--ink);color:var(--sand);border-top:3px solid var(--gold);padding:3rem 1.2rem 2rem;font-size:1.05rem;line-height:1.9}
+footer h2{color:var(--gold);font-size:1.8rem;margin-bottom:.8rem}
+footer ol{padding-inline-start:1.4rem}
+footer li{margin-bottom:.3rem}
+.copy{margin-top:1.6rem;text-align:center;color:#b9a77d;font-size:.95rem}
+</style>
 </head>
-<body> 
+<body>
+
 <header>
  <div class="nav">
   <a class="brand" href="#home">امرؤ القيس</a>
@@ -137,5 +224,12 @@
   <p class="copy">يوسف محمد</p>
  </div>
 </footer>
+
+<script>
+// Mobile navigation toggle
+const menu=document.getElementById('menu'),links=document.getElementById('links');
+menu.addEventListener('click',()=>{menu.setAttribute('aria-expanded',links.classList.toggle('open'))});
+links.addEventListener('click',e=>{if(e.target.tagName==='A'){links.classList.remove('open');menu.setAttribute('aria-expanded','false')}});
+</script>
 </body>
 </html>
